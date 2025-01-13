@@ -20,8 +20,6 @@ This project is a full-stack application for an in-browser markdown editor. The 
 - **Local Storage:** If the browser is refreshed, the current state of the markdown editor persists using local storage.
 - **Full-Stack Application:** The project includes a backend for storing and retrieving data, enhancing scalability and real-time collaboration.
 
----
-
 ## Tech Stack
 
 ### Frontend
