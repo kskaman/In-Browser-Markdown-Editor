@@ -1,23 +1,23 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./src/**/*.{html,js}"],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       colors: {
-        ravenBlack: "#151619",
-        onyxGray: "#1d1f22",
-        charcoalGray: "282d31",
-        slateGray: "#35393f",
+        "raven-black": "#151619",
+        "onyx-gray": "#1d1f22",
+        "charcoal-gray": "#282d31",
+        "slate-gray": "#35393f",
 
-        steelGray: "#5a6069",
-        pewterGray: "#7c8187",
-        mistGray: "c1c4cb",
-        silverMist: "#e4e4e4",
+        "steel-gray": "#5a6069",
+        "pewter-gray": "#7c8187",
+        "mist-gray": "#c1c4cb",
+        "silver-mist": "#e4e4e4",
 
-        cloudWhite: "#f5f5f5",
-        pureWhite: "#ffffff",
-        coralOrange: "#e46643",
-        peachSunset: "#f39765",
+        "cloud-white": "#f5f5f5",
+        "pure-white": "#ffffff",
+        "coral-orange": "#e46643",
+        "peach-sunset": "#f39765",
       },
       fontFamily: {
         sans: ["Roboto", "sans-serif"],

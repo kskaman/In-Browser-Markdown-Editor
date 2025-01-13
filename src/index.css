@@ -1,7 +1,13 @@
+@import "@fontsource/roboto";
+@import "@fontsource/roboto-mono";
+@import "@fontsource/roboto-slab";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import "@fontsource/roboto";
-@import "@fontsource/roboto-mono";
-@import "@fontsource/roboto-slab";
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
