@@ -2,10 +2,10 @@ import React, { useState, useRef } from "react";
 import documentIcon from "../assets/icon-document.svg";
 
 const FileName = () => {
-  const [fileName, setFileName] = useState("Untitled Document.md"); // Current filename
-  const [isEditing, setIsEditing] = useState(false); // Whether user is editing
-  const [error, setError] = useState(""); // Error message for validation
-  const [currentInputValue, setCurrentInputValue] = useState(fileName); // Input value during editing
+  const [fileName, setFileName] = useState("Untitled Document.md");
+  const [isEditing, setIsEditing] = useState(false);
+  const [error, setError] = useState("");
+  const [currentInputValue, setCurrentInputValue] = useState(fileName);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const validateFileName = (name: string) => {
@@ -29,8 +29,8 @@ const FileName = () => {
     }
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter") {
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === "Enter") {
       handleSave();
     }
   };
@@ -45,9 +45,9 @@ const FileName = () => {
     setTimeout(() => inputRef.current?.focus(), 0);
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setError("");
-    setCurrentInputValue(e.target.value);
+    setCurrentInputValue(event.target.value);
   };
 
   return (
