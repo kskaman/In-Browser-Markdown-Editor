@@ -1,23 +1,24 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: "class",
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       colors: {
-        "raven-black": "#151619",
-        "onyx-gray": "#1d1f22",
-        "charcoal-gray": "#282d31",
-        "slate-gray": "#35393f",
+        "palette-1000": "#151619",
+        "palette-900": "#1d1f22",
+        "palette-800": "#2b2d31",
+        "palette-700": "#35393f",
 
-        "steel-gray": "#5a6069",
-        "pewter-gray": "#7c8187",
-        "mist-gray": "#c1c4cb",
-        "silver-mist": "#e4e4e4",
+        "palette-600": "#5a6069",
+        "palette-500": "#7c8187",
+        "palette-400": "#c1c4cb",
+        "palette-300": "#e4e4e4",
 
-        "cloud-white": "#f5f5f5",
-        "pure-white": "#ffffff",
-        "coral-orange": "#e46643",
-        "peach-sunset": "#f39765",
+        "palette-200": "#f5f5f5",
+        "palette-100": "#ffffff",
+        orange: "#e46643",
+        "orange-hover": "#f39765",
       },
       fontFamily: {
         sans: ["Roboto", "sans-serif"],

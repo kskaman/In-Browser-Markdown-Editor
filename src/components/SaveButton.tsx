@@ -3,9 +3,9 @@ import saveIcon from "../assets/icon-save.svg";
 const InteractiveButton = () => {
   return (
     <button
-      className="w-[152px] h-[40px] bg-coral-orange
+      className="w-[152px] h-[40px] bg-orange
           flex items-center justify-center gap-[8px]
-          hover:bg-peach-sunset text-pure-white rounded-[4px]
+          hover:bg-orange-hover active:bg-orange text-palette-100 rounded-[4px]
           cursor-pointer
           "
     >

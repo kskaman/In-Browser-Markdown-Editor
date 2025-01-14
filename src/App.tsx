@@ -2,6 +2,8 @@ import SaveButton from "./components/SaveButton";
 
 import NewDocumentButton from "./components/NewDocumentButton";
 import ConfirmButton from "./components/ConfirmButton";
+import ThemeButton from "./components/ThemeButton";
+import FileName from "./components/FileName";
 
 const App = () => {
   return (
@@ -9,6 +11,8 @@ const App = () => {
       <SaveButton />
       <NewDocumentButton />
       <ConfirmButton />
+      <ThemeButton />
+      <FileName />
     </div>
   );
 };
