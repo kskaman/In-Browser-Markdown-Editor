@@ -62,7 +62,7 @@ const FileName = () => {
               ref={inputRef}
               value={currentInputValue}
               onChange={handleChange}
-              className="bg-transparent border-b-2 border-palette-500 text-palette-100 outline-none focus:border-palette-100 caret-orange"
+              className="bg-transparent w-[272px] border-b-2 border-palette-500 text-palette-100 outline-none focus:border-palette-100 caret-orange"
               onKeyDown={handleKeyDown}
               onBlur={handleBlur}
             />
