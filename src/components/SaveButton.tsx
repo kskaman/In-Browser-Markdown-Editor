@@ -6,7 +6,7 @@ const InteractiveButton = () => {
       className="w-[152px] h-[40px] bg-orange
           flex items-center justify-center gap-[8px]
           hover:bg-orange-hover active:bg-orange text-palette-100 rounded-[4px]
-          cursor-pointer
+          cursor-pointer mx-4
           "
     >
       <img src={saveIcon} alt="Save Icon" className="w-4 h-4" />
