@@ -2,15 +2,29 @@ import FileName from "./FileName";
 import SaveButton from "./SaveButton";
 
 import menuIcon from "../assets/icon-menu.svg";
+import closeIcon from "../assets/icon-close.svg";
 import CustomDeleteIcon from "../assets/CustomDeleteIcon";
 
-const Header = () => {
+interface HeaderProps {
+  isOpen: boolean;
+  toggleNavbar: (val: boolean) => void;
+}
+
+const Header = ({ isOpen, toggleNavbar }: HeaderProps) => {
   return (
     <div className="h-[72px] bg-palette-800 flex flex-row items-center">
       {/* Menu Container */}
-      <div className="w-[72px] h-[72px] flex justify-center items-center bg-palette-700">
-        <img src={menuIcon} width="30px" height="18px" />
-      </div>
+      <button
+        className="w-[72px] h-[72px] flex 
+          justify-center items-center bg-palette-700"
+        onClick={() => toggleNavbar(!isOpen)}
+      >
+        {isOpen ? (
+          <img src={closeIcon} width="30px" height="18px" />
+        ) : (
+          <img src={menuIcon} width="30px" height="18px" />
+        )}
+      </button>
 
       <div className="flex w-[184px] items-center justify-center">
         <div className="text-palette-100 font-bold text-[15px] w-[131px] flex flex-row justify-between">
