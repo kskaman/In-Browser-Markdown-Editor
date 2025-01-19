@@ -56,13 +56,17 @@ const FileName = () => {
         <img src={documentIcon} alt="Document Icon" />
 
         <div className="flex flex-col gap-[3px]">
-          <div className="text-palette-500">Document Name</div>
+          <div className="text-palette-500 font-sans font-light text-[13px]">
+            Document Name
+          </div>
           {isEditing ? (
             <input
               ref={inputRef}
               value={currentInputValue}
               onChange={handleChange}
-              className="bg-transparent w-[272px] border-b-2 border-palette-500 text-palette-100 outline-none focus:border-palette-100 caret-orange"
+              className="bg-transparent w-[272px] text-[15px] font-sans
+                border-b-2 border-palette-500 text-palette-100 
+                outline-none focus:border-palette-100 caret-orange"
               onKeyDown={handleKeyDown}
               onBlur={handleBlur}
             />

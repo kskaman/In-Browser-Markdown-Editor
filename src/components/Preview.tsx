@@ -21,7 +21,9 @@ const Preview = ({ markdown }: PreviewProps) => {
       </div>
       {/* Markdown Preview */}
       <div
-        className="flex flex-col  h-[calc(100vh-114px)] gap-[20px] overflow-auto py-[22px] px-[20px] bg-white dark:bg-palette-800 
+        className="flex flex-col h-[calc(100vh-114px)] 
+          gap-[20px] font-slab overflow-auto py-[22px] px-[20px] 
+          bg-white dark:bg-palette-800 
           text-palette-500 dark:text-white text-[14px] leading-[24px]"
       >
         <ReactMarkdown
@@ -89,14 +91,75 @@ const Preview = ({ markdown }: PreviewProps) => {
                 {children}
               </a>
             ),
-            code: ({ inline, children }) =>
-              inline ? (
-                <code className="text-palette-700">{children}</code>
-              ) : (
-                <pre className="bg-palette-200 text-palette-700 p-6 rounded-[4px]">
-                  <code>{children}</code>
-                </pre>
-              ),
+            code: ({ children }) => (
+              <code className={`text-palette-700`}>{children}</code>
+            ),
+            pre: ({ children }) => (
+              <pre
+                className={`bg-palette-200 text-palette-700 p-6 rounded-[4px]`}
+              >
+                {children}
+              </pre>
+            ),
+
+            hr: (props) => (
+              <hr className="my-4 border-palette-300" {...props} />
+            ),
+
+            table: ({ children, ...props }) => (
+              <table
+                className="w-full border-collapse border border-palette-300"
+                {...props}
+              >
+                {children}
+              </table>
+            ),
+            thead: ({ children, ...props }) => (
+              <thead
+                className="bg-palette-200 
+                 border-b border-palette-300"
+                {...props}
+              >
+                {children}
+              </thead>
+            ),
+            tbody: ({ children, ...props }) => (
+              <tbody {...props}>{children}</tbody>
+            ),
+            tr: ({ children, ...props }) => (
+              <tr className="border-b border-palette-300" {...props}>
+                {children}
+              </tr>
+            ),
+            th: ({ children, ...props }) => (
+              <th
+                className="py-2 px-4 text-left font-bold border border-palette-300 
+                 text-palette-700"
+                {...props}
+              >
+                {children}
+              </th>
+            ),
+            td: ({ children, ...props }) => (
+              <td
+                className="py-2 px-4 border border-palette-300 
+                 text-palette-500"
+                {...props}
+              >
+                {children}
+              </td>
+            ),
+
+            strong: ({ children, ...props }) => (
+              <strong className="font-bold text-palette-700" {...props}>
+                {children}
+              </strong>
+            ),
+            em: ({ children, ...props }) => (
+              <em className="italic text-palette-700" {...props}>
+                {children}
+              </em>
+            ),
           }}
         />
       </div>

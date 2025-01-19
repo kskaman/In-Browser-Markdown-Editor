@@ -19,7 +19,9 @@ const Editor = ({ text, onChange }: EditorProps) => {
       </div>
       {/* Editor Space */}
       <textarea
-        className="flex-grow h-[calc(100vh-114px)] overflow-auto w-full px-4 pt-[9px] pb-4 text-[14px] leading-[24px] text-palette-700 dark:text-palette-400
+        className="flex-grow font-mono h-[calc(100vh-114px)] 
+            overflow-auto w-full px-4 pt-[9px] pb-4 text-[14px] 
+            leading-[24px] text-palette-700 dark:text-palette-400
             bg-palette-100 dark:bg-palette-900 resize-none outline-none"
         value={text}
         onChange={(e) => onChange(e.target.value)}
