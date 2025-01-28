@@ -4,45 +4,79 @@ import HomePage from "./Pages/HomePage";
 import axios from "axios";
 import Navbar from "./components/Navbar";
 
-interface File {
-  id: number;
-  createdAt: string;
-  name: string;
-  content: string;
-}
+import { File } from "./types/File";
 
 const App: React.FC = () => {
   const [files, setFiles] = useState<File[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isAsideOpen, setAsideOpen] = useState<boolean>(false);
 
   useEffect(() => {
-    const baseUrl = "http://localhost:3001/files";
+    const controller = new AbortController();
 
     const fetchFiles = async () => {
-      const response = await axios.get(baseUrl);
-      setFiles(response.data);
-      setLoading(false);
+      try {
+        const response = await axios.get("/data.json", {
+          signal: controller.signal,
+        });
+        setFiles(response.data.files);
+      } catch (error) {
+        console.error("Error fetching files:", error);
+      }
     };
 
     fetchFiles();
+
+    return () => {
+      controller.abort();
+    };
   }, []);
 
-  const fileContent = files[1]?.content;
+  // Select the second file by default after `files` is updated
+  useEffect(() => {
+    if (files.length > 1) {
+      setSelectedFile(files[1]);
+      setLoading(false);
+    }
+  }, [files]);
+
+  const handleFileSelect = (file: File) => {
+    setSelectedFile(file);
+  };
+
+  useEffect(() => {
+    console.log("selectedFile updated:", selectedFile);
+  }, [selectedFile]);
+
   return (
-    <div className="flex flex-row">
-      {isAsideOpen && <Navbar />}
-      <div>
-        <Header isOpen={isAsideOpen} toggleNavbar={setAsideOpen} />
-        {loading ? (
-          <p>Loading...</p>
-        ) : files[1] ? (
-          <HomePage data={fileContent} />
-        ) : (
-          <p>No file data available</p>
-        )}
-      </div>
+    <div className="flex flex-row w-screen overflow-y-hidden">
+      {loading ? (
+        <p>loading...</p>
+      ) : (
+        <>
+          {isAsideOpen && (
+            <Navbar
+              isOpen={isAsideOpen}
+              files={files}
+              onFileSelect={handleFileSelect}
+            />
+          )}
+          <div
+            className={`relative flex flex-col ml-0 transform ${
+              isAsideOpen ? "translate-x-[250px]" : "translate-x-0"
+            } transition-transform duration-500 ease-in-out`}
+          >
+            <Header
+              isOpen={isAsideOpen}
+              fileName={selectedFile?.name || "none"}
+              toggleNavbar={setAsideOpen}
+            />
+
+            <HomePage data={selectedFile?.content || " No content available"} />
+          </div>
+        </>
+      )}
     </div>
   );
 };

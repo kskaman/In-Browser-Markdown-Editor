@@ -1,8 +1,12 @@
 import React, { useState, useRef } from "react";
 import documentIcon from "../assets/icon-document.svg";
 
-const FileName = () => {
-  const [fileName, setFileName] = useState("Untitled Document.md");
+interface FileNameProps {
+  fileOpen: string;
+}
+
+const FileName = ({ fileOpen }: FileNameProps) => {
+  const [fileName, setFileName] = useState(fileOpen);
   const [isEditing, setIsEditing] = useState(false);
   const [error, setError] = useState("");
   const [currentInputValue, setCurrentInputValue] = useState(fileName);

@@ -8,15 +8,17 @@ import CustomDeleteIcon from "../assets/CustomDeleteIcon";
 interface HeaderProps {
   isOpen: boolean;
   toggleNavbar: (val: boolean) => void;
+  fileName: string;
 }
 
-const Header = ({ isOpen, toggleNavbar }: HeaderProps) => {
+const Header = ({ isOpen, toggleNavbar, fileName }: HeaderProps) => {
   return (
     <div className="h-[72px] bg-palette-800 flex flex-row items-center">
       {/* Menu Container */}
       <button
         className="w-[72px] h-[72px] flex 
-          justify-center items-center bg-palette-700"
+          justify-center items-center bg-palette-700
+          active:bg-orange"
         onClick={() => toggleNavbar(!isOpen)}
       >
         {isOpen ? (
@@ -36,7 +38,7 @@ const Header = ({ isOpen, toggleNavbar }: HeaderProps) => {
       {/* Vertical Divider */}
       <div className="h-[40px] w-[1px] bg-palette-600"></div>
       {/* FileName Container */}
-      <FileName />
+      <FileName fileOpen={fileName} />
 
       {/* Delete icon */}
       <button className="mr-2 ml-auto">
