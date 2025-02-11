@@ -10,7 +10,7 @@ const Preview = ({ markdown }: PreviewProps) => {
     <div className="flex flex-col">
       {/* Header */}
       <div
-        className="w-full h-[42px]
+        className="h-[42px]
           bg-palette-200 dark:bg-palette-900 text-palette-500 pt-[8px] pl-[16px]"
       >
         <div className="w-[71px] h-[16px] flex flex-row justify-between">

@@ -1,13 +1,19 @@
-import React, { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Editor from "../components/Editor";
 import Preview from "../components/Preview";
+import { FileContext } from "../context/FilesContext";
 
-interface HomePageProps {
-  data: string; // Type for the `data` prop
-}
+const HomePage = () => {
+  const { selectedFile } = useContext(FileContext);
+  const [markdown, setMarkdown] = useState<string>(selectedFile?.content || "");
 
-const HomePage: React.FC<HomePageProps> = ({ data }) => {
-  const [markdown, setMarkdown] = useState<string>(data || "");
+  useEffect(() => {
+    setMarkdown(markdown);
+  }, [markdown]);
+
+  useEffect(() => {
+    setMarkdown(selectedFile?.content || "");
+  }, [selectedFile]);
 
   return (
     <div>

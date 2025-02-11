@@ -1,15 +1,16 @@
+import { useContext } from "react";
+import { FileContext } from "../context/FilesContext";
 import FileDiv from "./FileDiv";
 import NewDocumentButton from "./NewDocumentButton";
-
-import { File } from "../types/File";
+import { AppFile } from "../types/AppFile";
 
 interface NavbarProps {
   isOpen: boolean;
-  files: File[];
-  onFileSelect: (file: File) => void;
 }
 
-const Navbar = ({ isOpen, files, onFileSelect }: NavbarProps) => {
+const Navbar = ({ isOpen }: NavbarProps) => {
+  const { files, setSelectedFile } = useContext(FileContext);
+
   return (
     <aside
       className={`fixed top-0 left-0 
@@ -26,8 +27,12 @@ const Navbar = ({ isOpen, files, onFileSelect }: NavbarProps) => {
         MY DOCUMENTS
       </h1>
       <NewDocumentButton />
-      {files.map((file) => (
-        <FileDiv key={file.id} file={file} onClick={() => onFileSelect(file)} />
+      {files.map((file: AppFile) => (
+        <FileDiv
+          key={file.id}
+          file={file}
+          onClick={() => setSelectedFile(file)}
+        />
       ))}
     </aside>
   );
