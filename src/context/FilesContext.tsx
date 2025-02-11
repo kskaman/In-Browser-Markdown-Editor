@@ -7,6 +7,8 @@ interface FileContextProps {
   selectedFile: AppFile | null;
   setFiles: React.Dispatch<React.SetStateAction<AppFile[]>>;
   setSelectedFile: React.Dispatch<React.SetStateAction<AppFile | null>>;
+  markdown: string;
+  setMarkdown: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const FileContext = createContext<FileContextProps>({
@@ -14,4 +16,6 @@ export const FileContext = createContext<FileContextProps>({
   selectedFile: null,
   setFiles: () => {},
   setSelectedFile: () => {},
+  markdown: "",
+  setMarkdown: () => {},
 });

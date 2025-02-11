@@ -1,56 +1,107 @@
-import React, { useState, useRef } from "react";
+import { useState, useRef, useContext, useEffect } from "react";
 import documentIcon from "../assets/icon-document.svg";
+import ErrorDiv from "./ErrorDiv";
+import { FileContext } from "../context/FilesContext";
 
-interface FileNameProps {
-  fileOpen: string;
-}
+const FileName = () => {
+  const { files, selectedFile, setFiles, setSelectedFile, markdown } =
+    useContext(FileContext);
 
-const FileName = ({ fileOpen }: FileNameProps) => {
-  const [fileName, setFileName] = useState(fileOpen);
-  const [isEditing, setIsEditing] = useState(false);
-  const [error, setError] = useState("");
-  const [currentInputValue, setCurrentInputValue] = useState(fileName);
+  // State for file name, input state, editing state, and errors
+  const [fileName, setFileName] = useState<string>(selectedFile?.name || ".md");
+  const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+  const [currentInputValue, setCurrentInputValue] = useState<string>(fileName);
   const inputRef = useRef<HTMLInputElement>(null);
 
+  useEffect(() => {
+    setFileName(selectedFile?.name || ".md");
+    setCurrentInputValue(selectedFile?.name || ".md");
+  }, [selectedFile]);
+
   const validateFileName = (name: string) => {
-    if (!name.endsWith(".md")) {
+    const trimmedName = name.trim();
+    console.log(fileName);
+    if (trimmedName === "welcome.md") {
+      setError("A File cannot be named 'welcome.md'.");
+      return false;
+    }
+
+    // Enforce `.md` extension
+    if (!trimmedName.endsWith(".md")) {
       setError("Filename must end with .md");
       return false;
     }
 
-    setError("");
+    // Prevent duplicate filenames (except "untitled-document.md")
+    if (
+      trimmedName !== "untitled-document.md" &&
+      files.some(
+        (file) => file.name === trimmedName && file.id !== selectedFile?.id
+      )
+    ) {
+      setError("A file with this name already exists.");
+      return false;
+    }
+
+    setError(""); // Clear error if all checks pass
     return true;
   };
 
+  /** Handles saving logic */
   const handleSave = () => {
     const trimmedFileName = currentInputValue.trim();
+
     if (trimmedFileName === "") {
-      setFileName(fileName);
-      setIsEditing(false);
+      setFileName(fileName); // Reset to old name
     } else if (validateFileName(trimmedFileName)) {
       setFileName(trimmedFileName);
-      setIsEditing(false);
+
+      // Update `selectedFile` as well
+      setSelectedFile((prev) =>
+        prev ? { ...prev, name: trimmedFileName, content: markdown } : prev
+      );
+
+      // Update file name in the `files` array
+      const updatedFiles = files.map((file) =>
+        file.id === selectedFile?.id
+          ? { ...file, name: trimmedFileName, content: markdown }
+          : file
+      );
+      setFiles(updatedFiles);
     }
+
+    setIsEditing(false); // Exit editing mode
   };
 
+  /** Save on Enter key */
   const handleKeyDown = (event: React.KeyboardEvent) => {
     if (event.key === "Enter") {
       handleSave();
     }
   };
 
+  /** Save when focus is lost */
   const handleBlur = () => {
     handleSave();
   };
 
+  /** Handle click to edit */
   const handleClickFileName = () => {
+    // Prevent editing "welcome.md"
+    // Prevent renaming "welcome.md"
+    if (selectedFile?.name === "welcome.md") {
+      setError("'welcome.md' cannot be renamed.");
+      return false;
+    }
     setIsEditing(true);
     setCurrentInputValue(fileName);
     setTimeout(() => inputRef.current?.focus(), 0);
   };
 
+  /** Update input state when user types */
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setError("");
+    setError(""); // Reset error when typing
     setCurrentInputValue(event.target.value);
   };
 
@@ -63,6 +114,7 @@ const FileName = ({ fileOpen }: FileNameProps) => {
           <div className="text-palette-500 font-sans font-light text-[13px]">
             Document Name
           </div>
+
           {isEditing ? (
             <input
               ref={inputRef}
@@ -76,7 +128,8 @@ const FileName = ({ fileOpen }: FileNameProps) => {
             />
           ) : (
             <div
-              className="text-palette-100 cursor-pointer hover:underline"
+              className={`text-palette-100 cursor-pointer hover:underline 
+                ${selectedFile?.name === "welcome.md" ? "cursor-default" : ""}`} // Disable cursor on "welcome.md"
               onClick={handleClickFileName}
             >
               {fileName}
@@ -85,11 +138,7 @@ const FileName = ({ fileOpen }: FileNameProps) => {
         </div>
       </div>
 
-      {error && (
-        <div className="absolute top-[80px] left-[24px] bg-orange-hover text-palette-100 text-sm px-3 py-2 rounded shadow-md">
-          {error}
-        </div>
-      )}
+      {error && <ErrorDiv error={error} setError={setError} />}
     </div>
   );
 };

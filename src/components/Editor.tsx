@@ -1,9 +1,9 @@
-interface EditorProps {
-  text: string;
-  onChange: (newText: string) => void;
-}
+import { useContext } from "react";
+import { FileContext } from "../context/FilesContext";
 
-const Editor = ({ text, onChange }: EditorProps) => {
+const Editor = () => {
+  const { markdown, setMarkdown } = useContext(FileContext);
+
   return (
     <div className="flex flex-col h-full">
       {/* Header */}
@@ -23,8 +23,8 @@ const Editor = ({ text, onChange }: EditorProps) => {
             overflow-auto px-4 pt-[9px] pb-4 text-[14px] 
             leading-[24px] text-palette-700 dark:text-palette-400
             bg-palette-100 dark:bg-palette-900 resize-none outline-none"
-        value={text}
-        onChange={(e) => onChange(e.target.value)}
+        value={markdown}
+        onChange={(e) => setMarkdown(e.target.value)}
         placeholder="Enter your Markdown here..."
       />
     </div>

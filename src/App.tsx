@@ -10,9 +10,9 @@ const App: React.FC = () => {
     <div className="flex flex-row w-screen overflow-y-hidden">
       {isAsideOpen && <Navbar isOpen={isAsideOpen} />}
       <div
-        className={`relative flex flex-col ml-0 transform ${
+        className={`w-full relative flex flex-col ml-0 transform ${
           isAsideOpen ? "translate-x-[250px]" : "translate-x-0"
-        } transition-transform duration-500 ease-in-out min-w-[100%]`}
+        } transition-transform duration-500 ease-in-out`}
       >
         <Header isOpen={isAsideOpen} toggleNavbar={setAsideOpen} />
 

@@ -8,38 +8,36 @@ interface Props {
 }
 
 export const FileProvider = ({ children }: Props) => {
-  // 1. Initialize empty array and loading = true
+  // Initialize empty array & default selectedFile
   const [files, setFiles] = useState<AppFile[]>([]);
   const [selectedFile, setSelectedFile] = useState<AppFile | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [markdown, setMarkdown] = useState<string>("");
 
   useEffect(() => {
-    // 2. Check localStorage on mount
+    // Check localStorage on mount
     const storedFiles = localStorage.getItem("files");
+    const storedSelectedFile = localStorage.getItem("selectedFile");
+
     if (storedFiles) {
-      // If localStorage has files, parse and use them immediately
-      const parsed = JSON.parse(storedFiles) as AppFile[];
-      if (parsed.length > 0) {
-        setFiles(parsed);
+      const parsedFiles = JSON.parse(storedFiles) as AppFile[];
+      setFiles(parsedFiles);
 
-        // read selectedFile from localStorage
-        const storedSelectedFile = localStorage.getItem("selectedFile");
-        if (storedSelectedFile) {
-          setSelectedFile(JSON.parse(storedSelectedFile));
-        } else {
-          // Or set a default
-          const defaultSelected =
-            parsed.find((file) => file.name === "welcome.md") || parsed[0];
-          setSelectedFile(defaultSelected);
-        }
-
-        // We have files, no fetch needed → turn off loading
-        setLoading(false);
-        return; // Stop here
+      // Use stored selectedFile or set default from files
+      if (storedSelectedFile) {
+        setSelectedFile(JSON.parse(storedSelectedFile));
+      } else if (parsedFiles.length > 0) {
+        const defaultFile =
+          parsedFiles.find((file) => file.name === "welcome.md") ||
+          parsedFiles[0];
+        setSelectedFile(defaultFile);
       }
+
+      setLoading(false); // No fetch needed
+      return;
     }
 
-    // 3. If localStorage is empty or has an empty array, fetch from data.json
+    // Fetch from `/data.json` if localStorage is empty
     (async () => {
       try {
         const response = await axios.get("/data.json");
@@ -49,51 +47,53 @@ export const FileProvider = ({ children }: Props) => {
           setFiles(remoteFiles);
           localStorage.setItem("files", JSON.stringify(remoteFiles));
 
-          const defaultSelected =
+          const defaultFile =
             remoteFiles.find((file) => file.name === "welcome.md") ||
             remoteFiles[0];
-          setSelectedFile(defaultSelected);
-
-          // Done fetching, turn off loading
-          setLoading(false);
-        } else {
-          // If no files from the server, we stay loading
-          // and print message of no files found on console
-          setLoading(true);
-          console.error("No files found in server");
+          setSelectedFile(defaultFile);
         }
+
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching files:", error);
-        setLoading(true);
+        setLoading(false);
       }
     })();
   }, []);
 
-  // 4. Whenever files change, save them to localStorage
+  // Save `files` to localStorage when it changes
   useEffect(() => {
     if (files.length > 0) {
       localStorage.setItem("files", JSON.stringify(files));
     }
   }, [files]);
 
-  // 5. Whenever selectedFile changes, save to localStorage
+  // Save `selectedFile` to localStorage when it changes
   useEffect(() => {
     if (selectedFile) {
       localStorage.setItem("selectedFile", JSON.stringify(selectedFile));
+      setMarkdown(selectedFile.content);
     }
   }, [selectedFile]);
 
   if (loading) {
     return (
       <div className="flex items-center justify-center w-screen h-screen">
-        Loading ...
+        Loading...
       </div>
     );
   }
 
   return (
     <FileContext.Provider
-      value={{ files, selectedFile, setFiles, setSelectedFile }}
+      value={{
+        files,
+        selectedFile,
+        setFiles,
+        setSelectedFile,
+        markdown,
+        setMarkdown,
+      }}
     >
       {children}
     </FileContext.Provider>

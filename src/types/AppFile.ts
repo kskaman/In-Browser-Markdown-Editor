@@ -1,5 +1,5 @@
 export interface AppFile {
-    id: number;
+    id: string;
     createdAt: string;
     name: string;
     content: string;

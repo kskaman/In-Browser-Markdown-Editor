@@ -1,11 +1,11 @@
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { FileContext } from "../context/FilesContext";
+import { useContext } from "react";
 
-interface PreviewProps {
-  markdown: string;
-}
+const Preview = () => {
+  const { markdown } = useContext(FileContext);
 
-const Preview = ({ markdown }: PreviewProps) => {
   return (
     <div className="flex flex-col">
       {/* Header */}

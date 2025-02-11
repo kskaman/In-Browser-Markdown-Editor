@@ -1,11 +1,8 @@
 import FileName from "./FileName";
 import SaveButton from "./SaveButton";
-
 import menuIcon from "../assets/icon-menu.svg";
 import closeIcon from "../assets/icon-close.svg";
-import CustomDeleteIcon from "../assets/CustomDeleteIcon";
-import { FileContext } from "../context/FilesContext";
-import { useContext } from "react";
+import DeleteButton from "./DeleteButton";
 
 interface HeaderProps {
   isOpen: boolean;
@@ -13,7 +10,6 @@ interface HeaderProps {
 }
 
 const Header = ({ isOpen, toggleNavbar }: HeaderProps) => {
-  const { selectedFile } = useContext(FileContext);
   return (
     <div className="h-[72px] bg-palette-800 flex flex-row items-center">
       {/* Menu Container */}
@@ -40,12 +36,10 @@ const Header = ({ isOpen, toggleNavbar }: HeaderProps) => {
       {/* Vertical Divider */}
       <div className="h-[40px] w-[1px] bg-palette-600"></div>
       {/* FileName Container */}
-      <FileName fileOpen={selectedFile?.name || "Untitled document.md"} />
+      <FileName />
 
-      {/* Delete icon */}
-      <button className="mr-2 ml-auto">
-        <CustomDeleteIcon />
-      </button>
+      {/* Delete button */}
+      <DeleteButton />
 
       {/* Save Button */}
       <SaveButton />

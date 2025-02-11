@@ -1,12 +1,8 @@
 import fileIcon from "../assets/icon-document.svg";
+import { AppFile } from "../types/AppFile";
 
 interface FileDivProps {
-  file: {
-    id: number;
-    createdAt: string;
-    name: string;
-    content: string;
-  };
+  file: AppFile;
   onClick: () => void;
 }
 
