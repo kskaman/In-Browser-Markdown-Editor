@@ -13,7 +13,7 @@ const DeleteButton = () => {
       setError("'welcome.md' cannot be deleted.");
       return;
     }
-    const newFiles = files.filter((file) => file.id !== selectedFile.id);
+    const newFiles = files.filter((file) => file.id !== selectedFile?.id);
     setFiles(newFiles);
     setSelectedFile(files[0]);
   };
