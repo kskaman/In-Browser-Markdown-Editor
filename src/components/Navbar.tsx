@@ -3,6 +3,7 @@ import { FileContext } from "../context/FilesContext";
 import FileDiv from "./FileDiv";
 import NewDocumentButton from "./NewDocumentButton";
 import { AppFile } from "../types/AppFile";
+import ThemeButton from "./ThemeButton";
 
 interface NavbarProps {
   isOpen: boolean;
@@ -34,6 +35,9 @@ const Navbar = ({ isOpen }: NavbarProps) => {
           onClick={() => setSelectedFile(file)}
         />
       ))}
+      <div className="mt-auto">
+        <ThemeButton />
+      </div>
     </aside>
   );
 };

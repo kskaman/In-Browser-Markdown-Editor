@@ -23,7 +23,7 @@ const Preview = () => {
       <div
         className="flex flex-col h-[calc(100vh-114px)] 
           gap-[20px] font-slab overflow-auto py-[22px] px-[20px] 
-          bg-white dark:bg-palette-800 
+          bg-white dark:bg-palette-900 
           text-palette-500 dark:text-white text-[14px] leading-[24px]"
       >
         <ReactMarkdown
@@ -32,31 +32,31 @@ const Preview = () => {
           components={{
             h1: (props) => (
               <h1
-                className="text-[32px] text-palette-700 font-bold"
+                className="text-[32px] text-palette-700 font-bold dark:text-palette-100"
                 {...props}
               />
             ),
             h2: (props) => (
               <h1
-                className="text-[28px] text-palette-700 font-bold"
+                className="text-[28px] text-palette-700 font-bold dark:text-palette-100"
                 {...props}
               />
             ),
             h3: (props) => (
               <h1
-                className="text-[24px] text-palette-700 font-bold"
+                className="text-[24px] text-palette-700 font-bold dark:text-palette-100"
                 {...props}
               />
             ),
             h4: (props) => (
               <h1
-                className="text-[20px] text-palette-700 font-bold"
+                className="text-[20px] text-palette-700 font-bold dark:text-palette-100"
                 {...props}
               />
             ),
             h5: (props) => (
               <h1
-                className="text-[16px] text-palette-700 font-bold"
+                className="text-[16px] text-palette-700 font-bold dark:text-palette-100"
                 {...props}
               />
             ),
@@ -76,7 +76,7 @@ const Preview = () => {
             blockquote: ({ children }) => (
               <blockquote
                 className="py-[22px] px-[28px] font-bold text-palette-700 border-l-[4px] 
-                rounded-[4px] border-orange bg-palette-200"
+                rounded-[4px] border-orange bg-palette-200 dark:bg-palette-800 dark:text-palette-100"
               >
                 {children}
               </blockquote>
@@ -92,11 +92,15 @@ const Preview = () => {
               </a>
             ),
             code: ({ children }) => (
-              <code className={`text-palette-700`}>{children}</code>
+              <code
+                className={`text-palette-700 dark:text-palette-100 dark:bg-palette-800`}
+              >
+                {children}
+              </code>
             ),
             pre: ({ children }) => (
               <pre
-                className={`bg-palette-200 text-palette-700 p-6 rounded-[4px]`}
+                className={`bg-palette-200 text-palette-700 p-6 rounded-[4px] dark:text-palette-100 dark:bg-palette-800`}
               >
                 {children}
               </pre>

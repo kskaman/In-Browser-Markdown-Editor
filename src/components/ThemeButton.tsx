@@ -21,7 +21,7 @@ const ThemeButton = () => {
   };
 
   return (
-    <div className="w-[160px] h-[72px] bg-palette-800 flex justify-center items-center">
+    <div className="w-[160px] h-[72px] bg-palette-900 flex justify-center items-center">
       <div className="w-[104px] h-[24px] flex flex-row items-center justify-between">
         <MdOutlineDarkMode
           size={20}
