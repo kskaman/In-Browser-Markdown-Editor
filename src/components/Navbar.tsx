@@ -19,7 +19,7 @@ const Navbar = ({ isOpen }: NavbarProps) => {
           bg-palette-900 w-[250px]
           py-[18px] pl-[24px] pr-[12px]
           transform ${isOpen ? "translate-x-0" : "-translate-x-full"}
-          transition-transform duration-500 ease-in-out}`}
+          transition-transform duration-500 ease}`}
     >
       <h1
         className="font-roboto text-[13.95px] tracking-[2px]
