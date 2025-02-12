@@ -19,7 +19,7 @@ const ErrorDiv = ({
   return (
     <div
       className="absolute top-[80px] bg-orange-hover text-palette-100 text-sm px-3 py-2 rounded shadow-md 
-             w-[250px] break-words whitespace-normal left-1 -translate-x-1/2"
+             w-[250px] break-words whitespace-normal left-1 -translate-x-1/2 z-10"
     >
       {error}
     </div>

@@ -88,7 +88,6 @@ const FileName = () => {
 
   /** Handle click to edit */
   const handleClickFileName = () => {
-    // Prevent editing "welcome.md"
     // Prevent renaming "welcome.md"
     if (selectedFile?.name === "welcome.md") {
       setError("'welcome.md' cannot be renamed.");
