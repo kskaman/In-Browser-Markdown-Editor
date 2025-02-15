@@ -1,13 +1,19 @@
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { MutableRefObject } from "react";
 import { FileContext } from "../context/FilesContext";
 import { useContext } from "react";
 
-const Preview = () => {
+const Preview = ({
+  previewRef,
+}: {
+  previewRef: MutableRefObject<HTMLDivElement | null>;
+}) => {
   const { markdown } = useContext(FileContext);
 
   return (
     <div
+      ref={previewRef}
       className="
         flex flex-col
         w-full

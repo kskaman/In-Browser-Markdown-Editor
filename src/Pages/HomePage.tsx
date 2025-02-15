@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import CustomShowPreviewIcon from "../assets/CustomShowPreviewIcon";
 import CustomHidePreviewIcon from "../assets/CustomHidePreviewIcon";
 import Editor from "../components/Editor";
 import Preview from "../components/Preview";
 import DownloadMarkdownButton from "../components/DownloadMarkdownButton";
+import DownloadPdfButton from "../components/DownloadPdfButton";
 
 const HomePage = () => {
   const [markdownOpen, setMarkdownOpen] = useState(true);
+  const previewRef = useRef<HTMLDivElement>(null);
 
   return (
     <div className="bg-palette-200 dark:bg-palette-900">
@@ -48,11 +50,19 @@ const HomePage = () => {
           className={`${!markdownOpen ? "block" : "hidden"}
       md:block flex-1`}
         >
-          <div className="pt-[8px] pl-[16px]">
+          <div className="h-[42px] py-[8px] pl-[16px] flex">
             <div className="w-[71px] h-[16px] flex flex-row justify-between">
               {Array.from("PREVIEW").map((char, index) => (
                 <span key={index}>{char}</span>
               ))}
+            </div>
+            <div
+              className="flex items-center
+                justify-center 
+                ml-auto mr-8 md:mr-0
+              "
+            >
+              <DownloadPdfButton previewRef={previewRef} />
             </div>
           </div>
         </div>
@@ -84,7 +94,7 @@ const HomePage = () => {
           className={`${!markdownOpen ? "block" : "hidden"}
       md:block flex-1 max-w-[100%] lg:max-w-[50%] mx-auto`}
         >
-          <Preview />
+          <Preview previewRef={previewRef} />
         </div>
       </div>
     </div>
