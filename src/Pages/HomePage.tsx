@@ -3,6 +3,7 @@ import CustomShowPreviewIcon from "../assets/CustomShowPreviewIcon";
 import CustomHidePreviewIcon from "../assets/CustomHidePreviewIcon";
 import Editor from "../components/Editor";
 import Preview from "../components/Preview";
+import DownloadMarkdownButton from "../components/DownloadMarkdownButton";
 
 const HomePage = () => {
   const [markdownOpen, setMarkdownOpen] = useState(true);
@@ -24,12 +25,20 @@ const HomePage = () => {
         >
           <div
             className="h-[42px] 
-              pl-4 pt-[8px]"
+              pl-4 py-[8px]
+              flex"
           >
             <div className="w-[95px] h-[16px] flex flex-row justify-between">
               {Array.from("MARKDOWN").map((char, index) => (
                 <span key={index}>{char}</span>
               ))}
+            </div>
+            <div
+              className="flex items-center justify-center 
+                ml-auto mr-8 md:mr-0
+              "
+            >
+              <DownloadMarkdownButton />
             </div>
           </div>
         </div>
@@ -64,7 +73,8 @@ const HomePage = () => {
 
         <div
           className={`${markdownOpen ? "block" : "hidden"}
-       flex-1 max-w-[100%] lg:max-w-[50%] mx-auto border-r border-palette-300 border-r-[2px] dark:border-palette-600`}
+       flex-1 max-w-[100%] lg:max-w-[50%] mx-auto border-r
+       border-palette-300 border-r-[2px] dark:border-palette-600`}
         >
           <Editor />
         </div>
