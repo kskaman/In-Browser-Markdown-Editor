@@ -1,50 +1,42 @@
 # In-Browser Markdown Editor
 
-This project is a full-stack application for an in-browser markdown editor. The challenge is to build the editor as close to the given design as possible while providing users with powerful features to manage and preview markdown documents effectively.
+This project is a front-end challenge from [FrontendMentors](https://www.frontendmentor.io/). It’s an in-browser Markdown editor built with React and TypeScript that lets users create, edit, and manage Markdown documents with ease. The editor features a live preview powered by ReactMarkdown, ensuring that the formatted output is accurately rendered in real time.
+
+## Project Origin
+This project was inspired by a challenge from FrontendMentors. I adopted the idea and design from their challenge and enhanced it with additional features such as file upload/download, PDF export, and robust local storage persistence.
 
 ## Features
 
 ### Core Functionality
+- **CRUD Operations:** Create, read, update, and delete Markdown documents.
+- **Live Editing & Preview:** Edit Markdown in an interactive editor and see the formatted output in real time.
+- **Document Management:** Easily name, save, and load documents with robust file management.
+- **Responsive & Minimalistic UI:** Optimized for both desktop and mobile devices, including dark mode support.
+- **Error Handling:** User-friendly feedback for any file operation issues.
 
-- **Create, Read, Update, Delete (CRUD):** Users can create, read, update, and delete markdown documents.
-- **Document Management:** Users can name and save documents for future access.
-- **Markdown Editing and Preview:**
-  - Edit markdown in a live editor.
-  - View the formatted preview of the content.
-  - Access a full-page preview for distraction-free reading.
-- **Responsive Design:** Optimal layout for various screen sizes.
-- **Interactive UI:** Hover states for all interactive elements.
-
-### Bonus Features
-
-- **Local Storage:** If the browser is refreshed, the current state of the markdown editor persists using local storage.
-- **Full-Stack Application:** The project includes a backend for storing and retrieving data, enhancing scalability and real-time collaboration.
+### Additional Features
+- **Local Storage Persistence:** Automatically saves your current state so that data isn’t lost on refresh.
+- **File Upload & Download:**
+  - **Upload:** Bring in existing `.md` files for editing.
+  - **Download:** Export your documents as raw Markdown (`.md`) or as high-quality, multi-page PDFs (via pdfMake).
+- **PDF Export:** Generate well-formatted PDFs that mirror the live preview exactly, with custom formatting rules applied.
 
 ## Tech Stack
 
 ### Frontend
+- **React** – UI Library
+- **TypeScript** – Programming Language
+- **Tailwind CSS** – Styling
+- **ReactMarkdown** – Markdown Rendering
+- **Vite** – Build Tool
 
-- **Framework/Library** : React
-- **State Management** : Redux
-- **Styling** : Tailwind CSS
-- **Programming Language** : Programming Language
+### Tools & Deployment
+- **pdfMake** – PDF Generation
+- **Vercel** – Deployment
 
-### Backend
-
-- **Runtime:** Node.js
-- **Framework:** Express.js
-- **Database:** MongoDB
-- **Authentication:** JWT
-
-### Bonus Tools
-
-- **Real-Time Collaboration:** WebSocket (e.g., Socket.IO)
-- **Deployment:** Docker, Vercel/Netlify for frontend and Render/Heroku for backend.
 
 ## License
-
 This project is licensed under the MIT License.
 
 ## Contact
-
-For any queries or feedback, please reach out to Your Name.
+For any queries or feedback, please reach out to [Your Name](mailto:your.email@example.com).
