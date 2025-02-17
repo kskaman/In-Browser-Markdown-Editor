@@ -4,6 +4,7 @@ import FileDiv from "./FileDiv";
 import NewDocumentButton from "./NewDocumentButton";
 import { AppFile } from "../types/AppFile";
 import ThemeButton from "./ThemeButton";
+import UploadMdFileButton from "./UploadMdFileButton";
 
 interface NavbarProps {
   isOpen: boolean;
@@ -27,7 +28,10 @@ const Navbar = ({ isOpen }: NavbarProps) => {
       >
         MY DOCUMENTS
       </h1>
-      <NewDocumentButton />
+      <div className="flex flex-col gap-2">
+        <UploadMdFileButton />
+        <NewDocumentButton />
+      </div>
       {files.map((file: AppFile) => (
         <FileDiv
           key={file.id}
