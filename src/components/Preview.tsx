@@ -1,19 +1,13 @@
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { MutableRefObject } from "react";
 import { FileContext } from "../context/FilesContext";
 import { useContext } from "react";
 
-const Preview = ({
-  previewRef,
-}: {
-  previewRef: MutableRefObject<HTMLDivElement | null>;
-}) => {
+const Preview = () => {
   const { markdown } = useContext(FileContext);
 
   return (
     <div
-      ref={previewRef}
       className="
         flex flex-col
         w-full
@@ -103,9 +97,11 @@ const Preview = ({
             <code
               className="
                 text-palette-700 
-                dark:text-palette-100 
+                dark:text-palette-100
+                bg-palette-200 
                 dark:bg-palette-800
                 break-words
+                p-1
               "
             >
               {children}

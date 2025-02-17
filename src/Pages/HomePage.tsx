@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import CustomShowPreviewIcon from "../assets/CustomShowPreviewIcon";
 import CustomHidePreviewIcon from "../assets/CustomHidePreviewIcon";
 import Editor from "../components/Editor";
@@ -8,7 +8,6 @@ import DownloadPdfButton from "../components/DownloadPdfButton";
 
 const HomePage = () => {
   const [markdownOpen, setMarkdownOpen] = useState(true);
-  const previewRef = useRef<HTMLDivElement>(null);
 
   return (
     <div className="bg-palette-200 dark:bg-palette-900">
@@ -59,10 +58,10 @@ const HomePage = () => {
             <div
               className="flex items-center
                 justify-center 
-                ml-auto mr-8 md:mr-0
+                ml-auto mr-8
               "
             >
-              <DownloadPdfButton previewRef={previewRef} />
+              <DownloadPdfButton />
             </div>
           </div>
         </div>
@@ -94,7 +93,7 @@ const HomePage = () => {
           className={`${!markdownOpen ? "block" : "hidden"}
       md:block flex-1 max-w-[100%] lg:max-w-[50%] mx-auto`}
         >
-          <Preview previewRef={previewRef} />
+          <Preview />
         </div>
       </div>
     </div>
